@@ -1,27 +1,10 @@
-# X12 EDI Tools
-
-![X12 EDI Tools Logo](logo.png)
-![Python](https://img.shields.io/badge/Python-3.9+-blue?logo=python)
-
-
-
-A comprehensive Python library for working with X12 EDI (Electronic Data Interchange) files, commonly used in healthcare for claims processing, eligibility verification, and other administrative transactions.
-
-## Installation
-
-Install the X12 EDI Tools library using pip:
-
-```bash
-pip install x12-edi-tools
-```
-
 ## Key Components
 
 ### X12Parser
 Parses X12 files into Python objects.
 
 ```python
-from x12_edi_tools import X12Parser
+from x12_edi_tools.x12_parser import X12Parser
 
 parser = X12Parser()
 parsed_data = parser.parse("path/to/x12_file.edi")
@@ -32,7 +15,7 @@ print(parsed_data)
 Generates X12 files from Python objects.
 
 ```python
-from x12_edi_tools import X12Generator
+from x12_edi_tools.x12_generator import X12Generator
 
 generator = X12Generator()
 x12_content = generator.generate(data_dict)
@@ -44,7 +27,7 @@ with open("output.edi", "w") as f:
 Validates X12 files against standard formats and custom rules.
 
 ```python
-from x12_edi_tools import X12Validator
+from x12_edi_tools.x_12_validator import X12Validator
 
 validator = X12Validator()
 is_valid, errors = validator.validate("path/to/x12_file.edi")
@@ -56,7 +39,7 @@ if not is_valid:
 Processes dental claims (837D transactions).
 
 ```python
-from x12_edi_tools import DentalClaimProcessor
+from x12_edi_tools.dental_claim_processor import DentalClaimProcessor
 
 processor = DentalClaimProcessor()
 claims = processor.process("path/to/837D_file.edi")
@@ -68,7 +51,7 @@ for claim in claims:
 Handles eligibility inquiries and responses (270/271 transactions).
 
 ```python
-from x12_edi_tools import EligibilityChecker
+from x12_edi_tools.eligibility_checker import EligibilityChecker
 
 checker = EligibilityChecker()
 request = checker.create_270_request(patient_data)
@@ -80,7 +63,7 @@ print(f"Patient eligible: {response.is_eligible}")
 Parses remittance advice (835) transactions.
 
 ```python
-from x12_edi_tools import RemittanceAdviceParser
+from x12_edi_tools.remittance_advise_parser import RemittanceAdviceParser
 
 parser = RemittanceAdviceParser()
 remittance = parser.parse("path/to/835_file.edi")
@@ -91,7 +74,7 @@ print(f"Total paid: ${remittance.total_paid}")
 Converts X12 data to and from other formats like JSON and CSV.
 
 ```python
-from x12_edi_tools import X12Converter
+from x12_edi_tools.x_12_converter import X12Converter
 
 converter = X12Converter()
 json_data = converter.to_json("path/to/x12_file.edi")
@@ -102,7 +85,7 @@ csv_data = converter.to_csv("path/to/x12_file.edi")
 Encrypts and decrypts X12 data for secure transmission and storage.
 
 ```python
-from x12_edi_tools import X12Encryptor
+from x12_edi_tools.x_12_encryptor import X12Encryptor
 
 encryptor = X12Encryptor("your-secret-key")
 encrypted_data = encryptor.encrypt("path/to/x12_file.edi")
@@ -113,7 +96,7 @@ decrypted_data = encryptor.decrypt(encrypted_data)
 Facilitates integration of X12 data with databases.
 
 ```python
-from x12_edi_tools import X12DatabaseIntegrator
+from x12_edi_tools.x_12_database_integrator import X12DatabaseIntegrator
 
 integrator = X12DatabaseIntegrator("database_connection_string")
 integrator.store_transaction("path/to/x12_file.edi")
@@ -124,19 +107,9 @@ transactions = integrator.retrieve_transactions(date_range)
 Provides detailed logging of X12 operations for auditing and troubleshooting.
 
 ```python
-from x12_edi_tools import X12Logger
+from x12_edi_tools.x_12_logger import X12Logger
 
 logger = X12Logger("path/to/log/directory")
 logger.log_parse("837", "path/to/837_file.edi", parse_result)
 logger.log_generate("835", "path/to/835_file.edi", generation_data)
 ```
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## Contact
-
-Don Johnson - dj@codetestcode.io
-
-Project Link: [https://github.com/donjohnson/x12-edi-tools](https://github.com/donjohnson/x12-edi-tools)
