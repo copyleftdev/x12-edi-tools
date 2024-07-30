@@ -1,5 +1,10 @@
 # X12 EDI Tools
 
+![X12 EDI Tools Logo](logo.png)
+![Python](https://img.shields.io/badge/Python-3.9+-blue?logo=python)
+
+
+
 A comprehensive Python library for working with X12 EDI (Electronic Data Interchange) files, commonly used in healthcare for claims processing, eligibility verification, and other administrative transactions.
 
 ## Installation
