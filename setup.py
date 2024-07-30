@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name="x12-edi-tools",
-    version="0.1.1",
+    version="0.1.2",
     author="Don Johnson",
     author_email="dj@codetestcode.io",
     description="A comprehensive set of tools for working with X12 EDI files",

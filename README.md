@@ -1,3 +1,20 @@
+# X12 EDI Tools
+
+![X12 EDI Tools Logo](logo.png)
+![Python](https://img.shields.io/badge/Python-3.9+-blue?logo=python)
+
+
+
+A comprehensive Python library for working with X12 EDI (Electronic Data Interchange) files, commonly used in healthcare for claims processing, eligibility verification, and other administrative transactions.
+
+## Installation
+
+Install the X12 EDI Tools library using pip:
+
+```bash
+pip install x12-edi-tools
+```
+
 ## Key Components
 
 ### X12Parser
@@ -113,3 +130,13 @@ logger = X12Logger("path/to/log/directory")
 logger.log_parse("837", "path/to/837_file.edi", parse_result)
 logger.log_generate("835", "path/to/835_file.edi", generation_data)
 ```
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## Contact
+
+Don Johnson - dj@codetestcode.io
+
+Project Link: [https://github.com/donjohnson/x12-edi-tools](https://github.com/donjohnson/x12-edi-tools)
