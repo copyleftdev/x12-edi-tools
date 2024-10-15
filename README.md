@@ -47,8 +47,7 @@ Validates X12 files against standard formats and custom rules.
 from x12_edi_tools.x_12_validator import X12Validator
 
 validator = X12Validator()
-is_valid, errors = validator.validate("path/to/x12_file.edi")
-if not is_valid:
+is_valid, errors, warnings = validator.validate("path/to/x12_file.edi")
     print("Validation errors:", errors)
 ```
 
