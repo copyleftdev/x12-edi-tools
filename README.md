@@ -134,6 +134,10 @@ logger.log_generate("835", "path/to/835_file.edi", generation_data)
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
+
+## License
+This project is licensed under the [MIT License](LICENSE).
+
 ## Contact
 
 Don Johnson - dj@codetestcode.io
