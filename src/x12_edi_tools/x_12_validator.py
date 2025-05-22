@@ -45,6 +45,7 @@ class X12Validator:
         Raises:
             X12ValidatorError: If validation fails due to critical errors.
         """
+        x12_content = x12_content.replace("\n", "")
         try:
             self._parse_x12_content(x12_content)
             self._validate_structure()
@@ -99,7 +100,7 @@ class X12Validator:
         """Validate the GS (Functional Group Header) segment."""
         gs = next((seg for seg in self.segments if seg.id == 'GS'), None)
         if gs and len(gs.elements) >= 8:
-            if gs.elements[7] != self.version.split('X')[0]:
+            if not gs.elements[7].startswith(self.version.split('X')[0]):
                 self.errors.append("GS version does not match ISA version")
         else:
             self.errors.append("Invalid GS segment")
