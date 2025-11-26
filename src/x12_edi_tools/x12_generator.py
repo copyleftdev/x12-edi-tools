@@ -92,25 +92,44 @@ class X12Generator:
             x12_content.append(segment_str + self.SEGMENT_TERMINATOR)
         return ''.join(x12_content)
 
-    def add_isa_segment(self, sender_id: str, receiver_id: str) -> None:
+    def add_isa_segment(self,
+        sender_id: str,
+        receiver_id: str,
+        sender_qualifier: str = "ZZ",
+        receiver_qualifier: str = "ZZ",
+        repetition_separator: str = "^",
+        ack_requested: bool = False,
+        environment_indicator: str = "P",
+        sub_element_separator: str = SUB_ELEMENT_SEPARATOR
+    ) -> None:
         """
         Add the ISA (Interchange Control Header) segment.
         
         Args:
             sender_id (str): The sender's identification number.
             receiver_id (str): The receiver's identification number.
+            sender_qualifier (str): The sender's identification qualifier/type.
+            receiver_qualifier (str): The receiver's identification qualifier/type.
+            ack_requested (bool): Acknowledgement is requested from receiver for this document.
+            environment_indicator (str): "P" = production; "T" = testing.
+            sub_element_separator (str): The sub-element separator used in this document.
         """
         self.control_numbers['ISA'] += 1
         isa_elements = [
             "00", "          ", "00", "          ",
-            "ZZ", sender_id.ljust(15), "ZZ", receiver_id.ljust(15),
+            sender_qualifier, sender_id.ljust(15), receiver_qualifier, receiver_id.ljust(15),
             self._get_current_date(), self._get_current_time(),
-            "^", self.version, str(self.control_numbers['ISA']).zfill(9),
-            "0", "P", ":"
+            repetition_separator, self.version, str(self.control_numbers['ISA']).zfill(9),
+            "1" if ack_requested else "0", environment_indicator, sub_element_separator
         ]
         self.add_segment("ISA", isa_elements)
 
-    def add_gs_segment(self, func_id_code: str, sender_code: str, receiver_code: str) -> None:
+    def add_gs_segment(self,
+        func_id_code: str,
+        sender_code: str,
+        receiver_code: str,
+        version_override: str | None = None
+    ) -> None:
         """
         Add the GS (Functional Group Header) segment.
         
@@ -118,12 +137,13 @@ class X12Generator:
             func_id_code (str): The functional identifier code.
             sender_code (str): The application sender's code.
             receiver_code (str): The application receiver's code.
+            version_override (str | None): Optional override for this section from the default version split.
         """
         self.control_numbers['GS'] += 1
         gs_elements = [
             func_id_code, sender_code, receiver_code,
             self._get_current_date(), self._get_current_time(),
-            str(self.control_numbers['GS']), "X", self.version.split("X")[0]
+            str(self.control_numbers['GS']), "X", version_override or self.version.split("X")[0]
         ]
         self.add_segment("GS", gs_elements)
 
