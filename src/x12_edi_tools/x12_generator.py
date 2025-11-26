@@ -161,7 +161,7 @@ class X12Generator:
     def add_se_segment(self) -> None:
         """Add the SE (Transaction Set Trailer) segment."""
         se_elements = [
-            str(len(self.segments) + 1),  # +1 to include this SE segment
+            str(len(self.segments) - 1),  # +1 to include this SE segment, -2 to ignore ISA and GS segments
             str(self.control_numbers['ST']).zfill(4)
         ]
         self.add_segment("SE", se_elements)
